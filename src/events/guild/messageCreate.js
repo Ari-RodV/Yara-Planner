@@ -7,7 +7,7 @@ module.exports = async (client, message) => {
     const command = client.commands.get(cmd) || client.commands.find(c => c.aliases.inlcudes(cmd))
 
     if (command) {
-        if (command.owner) {
+        if (command.OWNER) {
             const owners = process.env.OWNER_IDS.split(' ')
 
             if (!owners.includes(message.author.id))
@@ -18,20 +18,20 @@ module.exports = async (client, message) => {
                     ).join(', ')}`
                 })
         }
-        if (command.botPermissions) {
-            if (!interactions.guild.members.me.permissions.has(command.botPermissions))
+        if (command.BOT_PERMISSIONS) {
+            if (!interactions.guild.members.me.permissions.has(command.BOT_PERMISSIONS))
                 return message.reply( {
                     content: `**I need the following permits to execute this command**
-                    \n${command.botPermissions.map(permission =>
+                    \n${command.BOT_PERMISSIONS.map(permission =>
                         `/${permission}/`
                     ).join(', ')}`
                 })
         }
-        if (command.permissions) {
-            if (!interactions.guild.members.permissions.has(command.permissions))
+        if (command.PERMISSIONS) {
+            if (!interactions.guild.members.permissions.has(command.PERMISSIONS))
                 return message.reply( {
                     content: `**You need the following permissions to execute this command**
-                    \n${command.permissions.map(permission =>
+                    \n${command.PERMISSIONS.map(permission =>
                         `/${permission}/`
                     ).join(', ')}`
                 })
